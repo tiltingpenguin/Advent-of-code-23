@@ -1,4 +1,5 @@
 // Brute force solution, might refactor later
+// solution for my input is: 10834440
 
 use std::fs;
 use std::collections::BTreeMap;
