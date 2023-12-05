@@ -1,6 +1,6 @@
 use std::fs;
 
-fn main() {
+fn main()  {
     let path = "day4-input.txt";
     let input = fs::read_to_string(path).expect("fail");
     let result = process(input);
@@ -8,7 +8,6 @@ fn main() {
 }
 
 pub fn process(input: String) -> i32 {
-    let mut result = 0;
     let lines = input.lines().map(|x| format!("{}", x.to_string())).collect::<Vec<String>>();
     let size = lines.len();
     let mut winnings: Vec<i32> = Vec::with_capacity(size);
@@ -34,6 +33,6 @@ pub fn process(input: String) -> i32 {
             *elem += cur;
         }
     }
-    result = winnings.iter().sum();
+    let result = winnings.iter().sum();
     result
 }
