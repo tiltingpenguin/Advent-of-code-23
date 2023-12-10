@@ -2,10 +2,10 @@ use std::fs;
 
 #[derive(Debug, PartialEq, Eq)]
 enum Dir {
-    Top,
-    Right,
-    Down,
-    Left,
+    North,
+    East,
+    South,
+    West,
 }
 
 #[derive(Debug)]
@@ -20,7 +20,7 @@ fn main() {
     let path = "day10-input.txt";
     let input = fs::read_to_string(path).expect("fail");
     let result = process(input);
-    println!("{:?}", result);
+    println!("{}", result);
 }
 
 fn process(input: String) -> i32 {
@@ -40,75 +40,71 @@ fn process(input: String) -> i32 {
     // Start from pipe below S because my input allows it
     let mut pos = Pos {
         count: 1,
-        from: Dir::Top,
+        from: Dir::North,
         y: start.1 + 1,
         x: start.0,
     };
     while map[pos.y][pos.x] != 'S' {
-        if pos.from == Dir::Top {
+        if pos.from == Dir::North {
             match map[pos.y][pos.x] {
                 '|' => pos.y += 1,
                 'L' => {
                     pos.x += 1;
-                    pos.from = Dir::Left
+                    pos.from = Dir::West
                 }
                 'J' => {
                     pos.x -= 1;
-                    pos.from = Dir::Right
+                    pos.from = Dir::East
                 }
-                '.' => panic!(),
-                _ => (),
+                _ => unreachable!("Should not stray from path"),
             }
             pos.count += 1;
             continue;
         }
-        if pos.from == Dir::Right {
+        if pos.from == Dir::East {
             match map[pos.y][pos.x] {
                 '-' => pos.x -= 1,
                 'L' => {
                     pos.y -= 1;
-                    pos.from = Dir::Down
+                    pos.from = Dir::South
                 }
                 'F' => {
                     pos.y += 1;
-                    pos.from = Dir::Top
+                    pos.from = Dir::North
                 }
-                '.' => panic!(),
-                _ => (),
+                _ => unreachable!("Should not stray from path"),
             }
             pos.count += 1;
             continue;
         }
-        if pos.from == Dir::Down {
+        if pos.from == Dir::South {
             match map[pos.y][pos.x] {
                 '|' => pos.y -= 1,
                 '7' => {
                     pos.x -= 1;
-                    pos.from = Dir::Right
+                    pos.from = Dir::East
                 }
                 'F' => {
                     pos.x += 1;
-                    pos.from = Dir::Left
+                    pos.from = Dir::West
                 }
-                '.' => panic!(),
-                _ => (),
+                _ => unreachable!("Should not stray from path"),
             }
             pos.count += 1;
             continue;
         }
-        if pos.from == Dir::Left {
+        if pos.from == Dir::West {
             match map[pos.y][pos.x] {
                 '-' => pos.x += 1,
                 'J' => {
                     pos.y -= 1;
-                    pos.from = Dir::Down
+                    pos.from = Dir::South
                 }
                 '7' => {
                     pos.y += 1;
-                    pos.from = Dir::Top
+                    pos.from = Dir::North
                 }
-                '.' => panic!(),
-                _ => (),
+                _ => unreachable!("Should not stray from path"),
             }
             pos.count += 1;
             continue;
