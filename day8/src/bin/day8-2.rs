@@ -12,7 +12,7 @@ fn main() {
 }
 
 fn process(input: String) -> i64 {
-    let way = input.lines().nth(0).unwrap();
+    let way = input.lines().next().unwrap();
     let mut map: HashMap<&str, (&str, &str)> = HashMap::new();
     let mut lines = input.lines().collect::<Vec<&str>>();
     lines = lines[2..].to_owned();
@@ -28,13 +28,13 @@ fn process(input: String) -> i64 {
 
     let mut nodes = map
         .keys()
-        .filter(|c| c.ends_with("A"))
-        .map(|c| *c)
+        .filter(|c| c.ends_with('A'))
+        .copied()
         .collect::<Vec<&str>>();
     for node in nodes.iter_mut() {
         let mut count = 0;
         for direction in way.chars().cycle() {
-            if !node.ends_with("Z") {
+            if !node.ends_with('Z') {
                 match direction {
                     'L' => *node = map[node].0,
                     'R' => *node = map[node].1,
@@ -69,9 +69,7 @@ fn gcd(mut a: i64, mut b: i64) -> i64 {
         return a;
     }
     if b > a {
-        let tmp = a;
-        a = b;
-        b = tmp;
+        std::mem::swap(&mut a, &mut b);
     }
     while b > 0 {
         let tmp = a;

@@ -12,7 +12,7 @@ fn main() {
 }
 
 fn process(input: String) -> i32 {
-    let way = input.lines().nth(0).unwrap();
+    let way = input.lines().next().unwrap();
     let mut map: HashMap<&str, (&str, &str)> = HashMap::new();
     let mut node = "PTA";
     let mut lines = input.lines().collect::<Vec<&str>>();
@@ -27,7 +27,7 @@ fn process(input: String) -> i32 {
         map.insert(node, (left, right));
     }
     for direction in way.chars().cycle() {
-        if !node.ends_with("Z") {
+        if !node.ends_with('Z') {
             match direction {
                 'L' => node = map[node].0,
                 'R' => node = map[node].1,

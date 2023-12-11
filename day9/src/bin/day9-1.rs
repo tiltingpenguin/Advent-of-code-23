@@ -26,7 +26,7 @@ fn process(input: String) -> i32 {
     }
 
     for nums in input_arrs.iter_mut() {
-        *nums = nums.iter().rev().map(|x| *x).collect();
+        *nums = nums.iter().rev().copied().collect();
         let mut tmp: Vec<i32> = nums.windows(2).map(|x| x.to_vec()).map(|x| x[1] - x[0]).collect();
         let mut last_vals: Vec<i32> = vec![nums[nums.len()-1]];
         while !tmp.iter().all(|&x| x == 0) {

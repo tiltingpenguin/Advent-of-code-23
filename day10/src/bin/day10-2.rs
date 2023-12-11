@@ -116,8 +116,8 @@ fn process(input: String) -> i32 {
     let mut result = 0;
     let sqx = map[0].len() / 4;
     let sqy = map.len() / 4;
-    for y in mark_map[sqy..mark_map.len() - sqy].to_vec() {
-        for x in y[sqx..mark_map.len() - sqx].to_vec() {
+    for y in mark_map[sqy..mark_map.len() - sqy].iter().cloned() {
+        for x in y[sqx..mark_map.len() - sqx].iter().copied() {
             if x != 'x' {
                 result += 1;
             }
