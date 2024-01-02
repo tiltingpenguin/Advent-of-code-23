@@ -2,8 +2,6 @@ use nom::bytes::complete::tag;
 use nom::character::complete::{anychar, i32, space1};
 use nom::multi::{many_till, separated_list0};
 use nom::IResult;
-use cache_macro::cache;
-use lru_cache::LruCache;
 use std::fs;
 
 //theoretical bruteforce solution, didn't finish in 6 hours for me
